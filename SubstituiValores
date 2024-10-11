@@ -1,0 +1,20 @@
+Alteracao de dados na mesma coluna utilizando a liguagem M
+
+O codigo percorre a coluna [xxx] e altera o valor de cada celula que contenha uma palavra especifica a qual deseje ser substituida. Se qualquer uma dessas palavras for encontrada, o valor da celula o valor da celula e substituido por um valor especifico.
+
+ValorMotivoAlterado = Table.TransformColumns
+(
+  EtapaAnterior,
+  {
+    {
+      "Motivo"//Nome da coluna que tera os valores substituidos
+      each if
+      Text.Contains(_, "PALAVRA ESPECIFICA") or
+      Text.Contains(_, "PALAVRA ESPECIFICA2") or
+      Text.Contains(_, "PALAVRA ESPECIFICA3") 
+      then "CANCELADO" //Valor substituto
+      else _,
+      type text
+    }
+  }
+)
